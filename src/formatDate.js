@@ -19,17 +19,23 @@ function formatDate(date, fromFormat, toFormat) {
     dateMap[fromFormat[i]] = dateParts[i];
   }
 
-  if (dateMap['yyy'] && !dateMap['yy']) {
-    dateMap['yy'] = dateMap['yyy'].slice(-2);
+  if (dateMap['YYY'] && !dateMap['YY']) {
+    dateMap['YY'] = dateMap['YYY'].slice(-2);
   }
 
-  if (dateMap['yy'] && !dateMap['yyy']) {
-     const year = Number(dateMap['yy']);
-     dateMap['yyy'] = year < 30 ? '20' + dateMap['yy'] : '19' + dateMap['yy'];
+  if (dateMap['YY'] && !dateMap['YYY']) {
+     const year = Number(dateMap['YY']);
+     dateMap['YYY'] = year < 30
+     ? '20' + dateMap['YY']
+     : '19' + dateMap['YY'];
   }
 
-  const result = toFormat.slice(0, 3).map(part => dateMap[part]);
+  const result = [];
+
+  for (let i = 0; i < 3; i++) {
+    result.push(dateMap[toFormat[i]]);
+  }
 
   return result.join(toSeparators);
 }
-    module.exports = formatDate;
+   module.exports = formatDate;
