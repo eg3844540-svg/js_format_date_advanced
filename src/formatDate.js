@@ -12,18 +12,17 @@ function formatDate(date, fromFormat, toFormat) {
   const toSeparators = toFormat[3];
 
   const dateParts = date.split(fromSeparators);
-
-  const  dateMap = { };
+  const  dateMap = {};
 
   for (let i = 0; i < 3; i++) {
     dateMap[fromFormat[i]] = dateParts[i];
   }
 
-  if (dateMap['YYY'] && !dateMap['YY']) {
+  if (dateMap['YYY']) {
     dateMap['YY'] = dateMap['YYY'].slice(-2);
   }
 
-  if (dateMap['YY'] && !dateMap['YYY']) {
+  if (dateMap['YY']) {
      const year = Number(dateMap['YY']);
      dateMap['YYY'] = year < 30
      ? '20' + dateMap['YY']
